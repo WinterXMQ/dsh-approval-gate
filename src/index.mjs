@@ -1123,7 +1123,8 @@ export default {
         messages: [{ role: 'user', content: [{ type: 'text', text: userText }] }],
         system: systemPrompt,
         temperature: 0,
-        reasoningEffort: 'off',
+        // 注意：不传 reasoningEffort，部分 provider（如 bailiancodingplan/qwen3.7-plus）不支持该参数会抛错
+        // flash 判定为单句分类任务，模型不会输出多余 reasoning，无需强制关闭
         // 256：结论仅几个词，但模型偶发先输出复述/思考文本，64 会被截断导致解析失败
         maxTokens: 256,
         signal
